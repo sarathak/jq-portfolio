@@ -15,18 +15,36 @@ module.exports = function (grunt) {
                 dest: 'dist/<%= pkg.name %>.min.js'
             },
         },
-        jshint: {
-            all: ['src/**/*.js'],
+        concat: {
             options: {
-                jshintrc: true
+                // define a string to put between each file in the concatenated output
+                separator: ';'
+            },
+            dist: {
+                src: 'src/<%= pkg.name %>.js',
+                dest: 'dist/<%= pkg.name %>.js'
             }
+        },
+        jshint: {
+            files: ['Gruntfile.js', 'src/**/*.js',],
+            options: {
+                globals: {
+                    jQuery: true
+                }
+            }
+        },
+        watch: {
+            files: ['Gruntfile.js', 'src/**/*.js',],
+            tasks: ["concat"]
         }
     });
-
-    // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-jst');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('default', ['concat']);
 
 };
