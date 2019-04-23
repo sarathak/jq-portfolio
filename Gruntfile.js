@@ -33,18 +33,51 @@ module.exports = function (grunt) {
                 }
             }
         },
+        autoprefixer: {
+            options: {
+                browsers: [ 'last 2 versions', 'ie 7', 'ie 8', 'ie 9', 'ie 10', 'ie 11' ]
+            },
+            dist: {
+                files: {
+                    'dist/<%= pkg.name %>.css': 'src/<%= pkg.name %>.css'
+                }
+            }
+        },
+        cssmin: {
+            dist: {
+                files: {
+                    'dist/<%= pkg.name %>.min.css': 'src/<%= pkg.name %>.css'
+                }
+            }
+        },
+        // connect: {
+        //     server: {
+        //         options: {
+        //             port: 8080,
+        //             base: 'docs',
+        //             keepalive:true,
+        //         }
+        //     }
+        // },
         watch: {
-            files: ['Gruntfile.js', 'src/**/*.js',],
-            tasks: ["concat"]
+            files: ['Gruntfile.js', 'src/**/*.js', 'src/**/*.css',],
+            tasks: ["concat",'autoprefixer'],
+            // options: {
+            //     livereload: true
+            // },
         }
     });
+    // grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-jst');
 
     // Default task(s).
-    grunt.registerTask('default', ['concat']);
+    grunt.registerTask('debug', ['connect','cssmin']);
+    grunt.registerTask('build', ['uglify','cssmin']);
+    grunt.registerTask('default', ['concat','autoprefixer']);
 
 };

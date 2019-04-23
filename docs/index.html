@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>jQuery Portfolio gallery with Filter </title>
+
+    <!-- Bootstrap -->
+    <link href="asset/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="asset/css/style.css" rel="stylesheet">
+    <link href="../dist/jq-portfolio.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <ul id="portfolio">
+        <li>
+            <a>
+                <img src="asset/images/nature_1.jpg" />
+            </a>
+        </li>
+        <li>
+            <a>
+                <img src="asset/images/nature_2.jpg" />
+            </a>
+        </li>
+        <li>
+            <a>
+                <img src="asset/images/nature_3.jpg" />
+            </a>
+        </li>
+        <li>
+            <a>
+                <img src="asset/images/nature_4.jpg" />
+            </a>
+        </li>
+        <li>
+            <a>
+                <img src="asset/images/nature_5.jpg" />
+            </a>
+        </li>
+
+        <li>
+            <a>
+                <img src="asset/images/nature_6.jpg" />
+            </a>
+        </li>
+        <li>
+            <a>
+                <img src="asset/images/nature_7.jpg" />
+            </a>
+        </li>
+        <li>
+            <a>
+                <img src="asset/images/nature_8.jpg" />
+            </a>
+        </li>
+    </ul>
+    <script src="asset/js/jquery-3.4.0.min.js"></script>
+    <script src="../dist/jq-portfolio.js"></script>
+    <script>
+    $(function(){
+        $('#portfolio').portfolio({'a':'c'});
+    })
+    </script>
+</body>
+
+</html>
