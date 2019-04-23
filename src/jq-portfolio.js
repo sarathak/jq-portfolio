@@ -3,7 +3,9 @@
  * Licensed under: MIT
  */
 (function ($, window, document, undefined) {
-
+    var defaultOptions={
+        items:3,
+    };
 	/**
 	 * Creates a portfolio.
 	 * @class The Portfolio.
@@ -12,17 +14,41 @@
 	 * @param {Object} [options] - The options
 	 */
     function Portfolio(element, options) {
-        console.info(element, options);
+        this.options = $.extend({},defaultOptions,options)
         this.element = element;
         this.initialize();
     }
+    Portfolio.prototype.itemsCount= function(){
+        return 3;
+    }
     Portfolio.prototype.initialize = function() {
         this.element.addClass('jq-protfolio-list');
+        if(!this.options.width)
+        this.options.width=this.element.outerWidth();
+        var item_count = this.itemsCount();
+        var item_width = this.options.width/item_count;
+        var item_height = 500;
+
         var container =$('<div class="jq-protfolio"></div>');
+        var tabs = $('<div class="jq-protfolio-tabs"></div>');
+        container.append(tabs);
+        var warper = $('<div class="jq-protfolio-warper"></div>');
+        container.append(warper);
         this.element.before(container);
         this.element.detach();
-        container.append(this.element);
-
+        var self = this;
+        var i =0;
+        this.element.find('>div').each(function(){
+            var $this = $(this);
+            $this.css({'left':(i%item_count*item_width)+'px',
+            width:item_width+'px',
+            height:item_height+'px',
+            top:item_height*~~(i/item_count)
+        });
+            i++;
+        })
+        warper.append(this.element);
+        this.container=container;
 
     }
     /**

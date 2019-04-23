@@ -7,3 +7,14 @@
 
     
 }
+.jq-protfolio-list{
+    position: relative;
+    /* display: grid;
+    grid-column: 3; */
+}
+.jq-protfolio-list div {
+    position: absolute;
+    overflow: hidden;
+    
+    /* display: inline-grid; */
+}
